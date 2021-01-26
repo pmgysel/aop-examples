@@ -1,20 +1,30 @@
 package com.example.aop;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class MyRestController {
-  @LogMethod
-  @GetMapping(path = "/api/greeting/{name}")
-  public String hello(@PathVariable(value = "name") String name) {
-    return "Hello " + name + "!";
+
+  public MyRestController(FibonacciService fibonacciService, SimulateDatabase simulateDatabase) {
+    this.fibonacciService = fibonacciService;
+    this.simulateDatabase = simulateDatabase;
   }
 
-  @LogMethod
-  @GetMapping(path = "/api/order/{menu}")
-  public String order(@PathVariable(value = "menu") String menu) {
-    return "You placed an order for the menu " + menu + "!";
+  private final FibonacciService fibonacciService;
+  private final SimulateDatabase simulateDatabase;
+
+  @LogMethodName
+  @MonitorTime
+  @Cacheable("Fibonacci")
+  @GetMapping(path = "/api/fibonacci/{number}")
+  public Long fibonacci(@PathVariable(value = "number") Long number) {
+    return fibonacciService.nthFibonacciTerm(number);
+  }
+
+  @LogMethodName
+  @PostMapping(path = "/api/storeData")
+  public void storeData(@RequestParam(value = "data") String data) {
+    simulateDatabase.storeToDB(data);
   }
 }

@@ -9,10 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>aop</artifactId>
+	<artifactId>aop-examples</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>aop</name>
-	<description>Demo project for Aspect Oriented Programming</description>
+	<description>Some examples of Aspect Oriented Programming (AOP) with SpringBoot</description>
 
 	<properties>
 		<java.version>15</java.version>
@@ -39,6 +38,11 @@
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
 			<version>1.9.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
 		</dependency>
 
 	</dependencies>
