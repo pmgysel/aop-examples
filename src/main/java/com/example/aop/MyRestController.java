@@ -14,9 +14,9 @@ public class MyRestController {
   private final FibonacciService fibonacciService;
   private final SimulateDatabase simulateDatabase;
 
-  @LogMethodName
-  @MonitorTime
   @Cacheable("Fibonacci")
+  @MonitorTime
+  @LogMethodName
   @GetMapping(path = "/api/fibonacci/{number}")
   public Long fibonacci(@PathVariable(value = "number") Long number) {
     return fibonacciService.nthFibonacciTerm(number);
