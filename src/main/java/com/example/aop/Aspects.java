@@ -31,13 +31,13 @@ public class Aspects implements Ordered {
     return proceed;
   }
 
-  @Around("execution(* storeData(..))")
-  public Object doUnstableOperation(ProceedingJoinPoint pjp) throws Throwable {
+  @Around("@annotation(com.example.aop.RetryOperation)")
+  public Object doIdempotentOperation(ProceedingJoinPoint joinPoint) throws Throwable {
     int numAttempts = 0;
     RuntimeException exception;
     do {
       try {
-        return pjp.proceed();
+        return joinPoint.proceed();
       } catch(RuntimeException e) {
         numAttempts++;
         exception = e;

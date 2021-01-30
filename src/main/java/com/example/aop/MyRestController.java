@@ -23,6 +23,7 @@ public class MyRestController {
   }
 
   @LogMethodName
+  @RetryOperation
   @PostMapping(path = "/api/storeData")
   public void storeData(@RequestParam(value = "data") String data) {
     simulateDatabase.storeToDB(data);

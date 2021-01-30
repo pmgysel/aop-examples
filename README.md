@@ -21,11 +21,11 @@ mvn spring-boot:run
 ## Example REST calls
 
 * Compute a Fibonacci number:
-```json
+```raw
 GET http://localhost:8080/api/fibonacci/40
 ```
-* Store a String (simulate shaky database)
-```json
+* Store a String (simulate concurrency issues)
+```raw
 POST http://localhost:8080/api/storeData?data=hello-world
 ```
 
@@ -61,5 +61,5 @@ Method [storeData] gets called with parameters [hello-world]
 ```
 
 The following aspects are in play:
-* `doUnstableOperation`: This Aspect makes sure that the (unstable and idempotent) method is retried until it succeeds.
+* `@RetryOperation`: This Aspect makes sure that the (idempotent) method is retried until it succeeds.
 In the log above, you can see that it took 3 tries to store the data. 
