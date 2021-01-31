@@ -18,7 +18,6 @@ public class Aspects implements Ordered {
   public void logMethodName(JoinPoint joinPoint) {
     String method = joinPoint.getSignature().getName();
     String params = Arrays.toString(joinPoint.getArgs());
-    System.out.println("------------");
     System.out.println("Method [" + method + "] gets called with parameters " + params);
   }
 

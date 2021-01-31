@@ -1,8 +1,9 @@
 # Examples of Aspect Oriented Programming (AOP) with SpringBoot
 
 Most people know object oriented programming and functional programming. But
-what about **aspect oriented programming** (AOP)? This repository contains 4 examples
-of AOP, ranging from built-in annotations to custom Aspects.
+what about **aspect oriented programming** (AOP)? This repository contains 4
+fully working examples
+of AOP, ranging from standard Spring Aspects to custom Aspects.
 
 ## Dependencies
 
@@ -17,6 +18,8 @@ of AOP, ranging from built-in annotations to custom Aspects.
 mvn clean install
 mvn spring-boot:run
 ```
+* Find the Swagger-UI API under:
+http://localhost:8080/swagger-ui.html
 
 ## Example REST calls
 
@@ -48,16 +51,16 @@ is pretty slow, but the second call is super fast.
 to the console.
 * `@LogMethodName`: We use a second custom aspect which prints the name and arguments of our REST controller method.
 
-## Aspects for storing data
+## Aspect for a retry logic
 
-Storing a String in our shaky database creates the following log:
+We simulate a dadabase with concurrency issues.
+Storing a String in our database creates the following log:
 
 ```raw
 Method [storeData] gets called with parameters [hello-world]
-------------
 Method [storeData] gets called with parameters [hello-world]
-------------
 Method [storeData] gets called with parameters [hello-world]
+Pretend everything went fine
 ```
 
 The following aspects are in play:

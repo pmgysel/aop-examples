@@ -3,29 +3,33 @@ package com.example.aop;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-public class MyRestController {
+import java.util.Random;
 
-  public MyRestController(FibonacciService fibonacciService, SimulateDatabase simulateDatabase) {
+@RestController
+public class WebController {
+
+  public WebController(FibonacciService fibonacciService) {
     this.fibonacciService = fibonacciService;
-    this.simulateDatabase = simulateDatabase;
   }
 
   private final FibonacciService fibonacciService;
-  private final SimulateDatabase simulateDatabase;
 
   @Cacheable("Fibonacci")
-  @MonitorTime
   @LogMethodName
+  @MonitorTime
   @GetMapping(path = "/api/fibonacci/{number}")
   public Long fibonacci(@PathVariable(value = "number") Long number) {
     return fibonacciService.nthFibonacciTerm(number);
   }
 
-  @LogMethodName
   @RetryOperation
+  @LogMethodName
   @PostMapping(path = "/api/storeData")
   public void storeData(@RequestParam(value = "data") String data) {
-    simulateDatabase.storeToDB(data);
+    if (new Random().nextBoolean()) {
+      throw new RuntimeException();
+    } else {
+      System.out.println("Pretend everything went fine");
+    }
   }
 }
