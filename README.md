@@ -34,12 +34,12 @@ POST http://localhost:8080/api/storeData?data=hello-world
 
 ## Aspects for the Fibonacci computation
 
-The computation of a Fibonacci number creates the following log:
+If you compute the 40th Fibonacci number twice, you will see the
+following log:
 
 ```raw
 Method [fibonacci] gets called with parameters [40]
 Execution took [3379ms]
-------------
 Method [fibonacci] gets called with parameters [40]
 Execution took [3ms]
 ```
